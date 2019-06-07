@@ -1,0 +1,5 @@
+class StaticPostsPlazasType < ApplicationRecord
+
+
+
+end

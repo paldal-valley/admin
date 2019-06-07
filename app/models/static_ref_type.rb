@@ -1,0 +1,5 @@
+class StaticRefType < ApplicationRecord
+
+
+
+end

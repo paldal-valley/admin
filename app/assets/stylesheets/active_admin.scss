@@ -1,0 +1,95 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+$am-theme-primary: #4E98A4;
+
+@import "font-awesome";
+@import 'activeadmin_addons/material';
+@import 'activeadmin_addons/all';
+
+.sidebar_section{
+  min-width: 300px;
+}
+
+.info_card_list{
+  display: flex;
+  margin-bottom: 1.5rem;
+
+  .user_info{
+    background: teal;
+  }
+  .post_info{
+    background: maroon;
+  }
+  .comment_info{
+    background: cornflowerblue;
+  }
+  .question_info{
+    background: darkslateblue;
+  }
+
+  .info_card{
+    width: 300px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 10px;
+    color: white;
+
+    .icon{
+      margin-left: 15px;
+      width: 20%;
+
+      i{
+        font-size: 3rem;
+        margin-top: 8px;
+      }
+    }
+
+    .info_text{
+
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      margin-left: 20px;
+
+      .info_title{
+        margin-top: 12px;
+      }
+
+      .info_content{
+        margin: 0;
+      }
+    }
+  }
+}
+
+.graph_panel_contents{
+  padding: 20px;
+
+  .graph_title {
+    text-align: left;
+    margin-bottom: 0.7rem;
+  }
+
+  .graph_content {
+    text-align: right;
+    margin-top: 0.7rem;
+  }
+}
+
+.mx-2 {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
+}
