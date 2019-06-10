@@ -1,9 +1,11 @@
 class Post < ApplicationRecord
   enum isDeleted: [:no, :yes]
-  has_many :posts_questions, foreign_key: 'postId'
-  has_many :posts_plazas, foreign_key: 'postId'
-  has_many :posts_answers, foreign_key: 'postId'
-  has_many :posts_reviews, foreign_key: 'postId'
+  has_one :posts_question, foreign_key: 'postId'
+  has_one :posts_plaza, foreign_key: 'postId'
+  has_one :posts_answer, foreign_key: 'postId'
+  has_one :posts_review, foreign_key: 'postId'
+  has_many :likes, foreign_key: 'refId'
+  has_many :comments, foreign_key: 'refId'
   belongs_to :user, foreign_key: 'userId'
 
   def self.find_recent_week
