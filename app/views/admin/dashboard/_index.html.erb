@@ -72,7 +72,6 @@
   </div>
 
   <div style="width:30%; height:20%; display:inline-block;">
-    <div style="display:flex; flex-direction:column;">
       <div id="panel">
         <div class="index_content">
           <div class="index_as_table panel" style="text-align:center;">
@@ -109,22 +108,38 @@
           </div>
         </div>
       </div>
-      <div id="panel">
-        <div class="index_content">
-          <div class="index_as_table panel" style="overflow-y:scroll; text-align:center; max-height:600px;">
-            <table border="0" cellspacing="0" cellpadding="0" id="index_table_withdraws" class="index_table index" paginator="true">
-              <tbody>
-                <tr class="row row-business_number">
-                  <th class="center"></th>
-                  <th class="center"></th>
+  </div>
+
+  <div style="width:60%; height:20%; display:inline-block; float:right;">
+    <div id="panel">
+      <div class="index_content">
+        <div class="index_as_table panel" style="text-align:center;">
+          <table border="0" cellspacing="0" cellpadding="0" id="index_table_withdraws" class="index_table index" paginator="true">
+            <tbody>
+              <tr class="row">
+                <th class="bg-blue white center" colspan="4">최근 1주일 베스트 인기 게시글</th>
+              </tr>
+              <tr class="row">
+                <th class="center">추천수</th>
+                <th class="center">게시글</th>
+                <th class="center">작성자</th>
+                <th class="center">지갑주소</th>
+              </tr>
+              <% @hot_posts.each do |hot_post| %>
+                <tr class="row">
+                  <th class="center"><%= hot_post.likes.count %></th>
+                  <th class="center"><%= link_to hot_post.title, admin_posts_review_path(hot_post.posts_review&.id) %></th>
+                  <th class="center"><%= link_to hot_post.user.name, admin_user_path(hot_post.user.id) %></th>
+                  <th class="center"><%= hot_post.user.walletAddress%></th>
                 </tr>
-              </tbody>
-            </table>
-          </div>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
 <script type="text/javascript">
