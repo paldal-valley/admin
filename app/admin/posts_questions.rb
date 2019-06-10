@@ -34,7 +34,7 @@ ActiveAdmin.register PostsQuestion do
       obj.postId.present? ? (link_to User.find(obj.post.userId).name, admin_user_path(obj.post.userId)) : ''
     end
     column :category do |obj|
-      StaticPostsQuestionsType.find(obj.categoryId).title
+      obj.categoryId > 0 ? StaticPostsQuestionsType.find(obj.categoryId).title : "-"
     end
     column :title do |obj|
       obj.post.title

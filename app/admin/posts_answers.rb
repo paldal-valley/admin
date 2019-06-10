@@ -23,7 +23,7 @@ ActiveAdmin.register PostsAnswer do
       obj.postId.present? ? (link_to User.find(obj.post.userId).name, admin_user_path(obj.post.userId)) : ''
     end
     column :category do |obj|
-      StaticPostsQuestionsType.find(PostsQuestion.find(obj.postId_Q).categoryId).title
+      obj.posts_question.categoryId > 0 ? StaticPostsQuestionsType.find(obj.posts_question.categoryId).title : "-"
     end
     column "질문" do |obj|
       link_to Post.find(PostsQuestion.find(obj.postId_Q).postId).title, admin_posts_question_path(obj.postId_Q)

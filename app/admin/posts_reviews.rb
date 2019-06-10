@@ -6,7 +6,7 @@ ActiveAdmin.register PostsReview do
 
   batch_action :destroy, priority: 1 do |ids|
     PostsReview.where(id: ids).find_each do |p|
-      Post.find(p.postId).update(isDeleted: "yes")
+      p.post.update(isDeleted: "yes")
     end
     redirect_to collection_path, notice: "해당 게시물들을 성공적으로 삭제하였습니다."
   end
