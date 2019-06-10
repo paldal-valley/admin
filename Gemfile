@@ -15,10 +15,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'yaml_db'
 gem 'devise'
-gem 'ethereum.rb'
 gem "chartkick"
 gem 'groupdate'
 gem 'font-awesome-rails'
+gem 'web3-eth'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'

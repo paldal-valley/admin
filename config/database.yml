@@ -21,7 +21,8 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV['MYSQL_DATABASE_DEVELOPMENT'] %>
+  database: <%= ENV['MYSQL_DATABASE_PRODUCTION'] %>
+  # database: <%= ENV['MYSQL_DATABASE_DEVELOPMENT'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
