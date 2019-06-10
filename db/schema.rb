@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content", null: false
     t.integer "refId", default: 0, null: false
     t.integer "refType", default: 0, null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
     t.index ["userId"], name: "fk_comments_1_idx"
   end
 
-  create_table "graduates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "graduates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "userId"
     t.string "companyTitle"
     t.string "companyTeam"
@@ -46,7 +46,14 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
     t.index ["userId"], name: "graduates_ibfk_1_idx"
   end
 
-  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "likes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "refId"
+    t.integer "userId"
+    t.index ["refId"], name: "likes_ibfk_1_idx"
+    t.index ["userId"], name: "likes_ibfk_2_idx"
+  end
+
+  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "userId", default: 0, null: false
     t.string "title"
     t.text "content"
@@ -59,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
     t.index ["userId"], name: "posts_ibfk_1_idx"
   end
 
-  create_table "posts_answers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "posts_answers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "postId_Q"
     t.integer "postId"
     t.integer "isSelected", limit: 1
@@ -67,51 +74,46 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
     t.index ["postId_Q"], name: "posts_answers_ibfk1_idx"
   end
 
-  create_table "posts_plazas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "posts_plazas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "postId"
     t.integer "categoryId"
     t.index ["postId"], name: "posts_frees_ibfk_1_idx"
   end
 
-  create_table "posts_questions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "posts_questions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "postId"
     t.integer "categoryId", default: 0
     t.integer "reward"
-    t.string "posts_questionscol", limit: 45, default: "0"
     t.index ["postId"], name: "posts_questions_ibfk_1_idx"
   end
 
-  create_table "posts_reviews", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "posts_reviews", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "postId"
     t.integer "categoryId"
     t.index ["postId"], name: "posts_reviews_ibfk_1_idx"
   end
 
-  create_table "static_majors", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "static_majors", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
   end
 
-  create_table "static_posts_plazas_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "static_posts_plazas_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", limit: 45
   end
 
-  create_table "static_posts_questions_types", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "static_posts_questions_types", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", limit: 45
   end
 
-  create_table "static_posts_reviews_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "static_posts_reviews_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", limit: 45
   end
 
-  create_table "static_ref_types", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "static_ref_types", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
   end
 
-  create_table "tests", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
-    t.string "title", limit: 45
-  end
-
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=ucs2", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "password"
     t.string "name", limit: 45, default: ""
     t.string "walletAddress"
@@ -129,6 +131,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_121521) do
 
   add_foreign_key "comments", "users", column: "userId", name: "fk_comments_1"
   add_foreign_key "graduates", "users", column: "userId", name: "graduates_ibfk_1"
+  add_foreign_key "likes", "posts", column: "refId", name: "likes_ibfk_1"
+  add_foreign_key "likes", "users", column: "userId", name: "likes_ibfk_2"
   add_foreign_key "posts", "users", column: "userId", name: "posts_ibfk_1"
   add_foreign_key "posts_answers", "posts", column: "postId", name: "posts_answers_ibfk_2"
   add_foreign_key "posts_answers", "posts_questions", column: "postId_Q", name: "posts_answers_ibfk_1"
