@@ -15,6 +15,15 @@ ActiveAdmin.register PostsReview do
     link_to '삭제하기', delete_admin_post_path(id: PostsReview.find(params[:id]).postId, where: "/admin/posts_reviews"), method: :post
   end
 
+  filter :post_user_name, label: '작성자명', as: :string
+  filter :post_user_email, label: '작성자 이메일', as: :string
+  filter :categoryId, label: '카테고리', as: :select, collection: -> {
+    StaticPostsReviewsType.all.collect{ |p| ["#{p.title}", p.id] }
+  }
+  filter :post_title, label: '게시글명', as: :string
+  filter :post_createdDate, label: '작성일', as: :date_range
+  filter :post_isDeleted, label: '삭제여부', as: :select
+
   index do
     selectable_column
     id_column
@@ -34,7 +43,7 @@ ActiveAdmin.register PostsReview do
       obj.post.view
     end
     column :recommended do |obj|
-      obj.post.recommended
+      obj.post.likes.count
     end
     column "삭제여부" do |obj|
       obj.post.isDeleted

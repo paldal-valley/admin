@@ -2,7 +2,7 @@ class PostsQuestion < ApplicationRecord
   belongs_to :post, foreign_key: 'postId'
   has_many :posts_answers, foreign_key: 'postId_Q'
 
-  scope :select_answer, ->{joins(:posts_answers).where("posts_answers.isSelected = ?", 1).uniq}
+  scope :select_answer, ->{joins(:posts_answers).where("posts_answers.isSelected = ?", 1)}
   scope :unselect_answer, ->{where.not(id: PostsQuestion.joins(:posts_answers).where("posts_answers.isSelected = ?", 1).ids)}
 
   def find_answer_list
