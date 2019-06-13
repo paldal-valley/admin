@@ -9,12 +9,12 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # 실제 코드 배포
-RUN mkdir /prepay
-WORKDIR /prepay
-COPY Gemfile /prepay/Gemfile
-COPY Gemfile.lock /prepay/Gemfile.lock
+RUN mkdir /admin
+WORKDIR /admin
+COPY Gemfile /admin/Gemfile
+COPY Gemfile.lock /admin/Gemfile.lock
 RUN bundle install
-COPY . /prepay
+COPY . /admin
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
